@@ -55,12 +55,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mobil "
+                android:text="Kamera "
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/jenis_mobil"
+                android:id="@+id/jenis_kamera"
                 android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
