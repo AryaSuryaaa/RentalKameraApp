@@ -39,7 +39,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/kamera_logo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,21 +54,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="Tombol_info"
-                android:text="Informasi Mobil"
+                android:text="Informasi Kamera"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="tombol_sewa"
-                android:text="Sewa Mobil"
+                android:text="Sewa Kamera"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="tombol_contact"
-                android:text="Contact"
+                android:text="Pengembalian"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
 
