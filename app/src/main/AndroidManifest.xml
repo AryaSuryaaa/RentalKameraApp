@@ -19,7 +19,7 @@
             android:name=".StrukActivity"
             android:exported="true" />
         <activity
-            android:name=".SewaMobilActivity"
+            android:name=".SewaKameraActivity"
             android:exported="true" />
         <activity
             android:name=".listCameraActivity"

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tombol_sewa(View view) {
-        Intent intent =new Intent(MainActivity.this, SewaMobilActivity.class);
+        Intent intent =new Intent(MainActivity.this, SewaKameraActivity.class);
         startActivity(intent);
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SewaMobilActivity"
+    tools:context=".SewaKameraActivity"
     android:orientation="vertical"
     android:background="@color/azure">
     <TextView
@@ -53,12 +53,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Mobil       : "
+                    android:text="Nama Kamera       : "
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
 
                 <Spinner
-                    android:id="@+id/ad_listmobil"
+                    android:id="@+id/ad_listkamera"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -100,7 +100,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/harga_mobil"
+                    android:id="@+id/harga_kamera"
                     android:text=""
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
