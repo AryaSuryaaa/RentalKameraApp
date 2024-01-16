@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class listCameraActivity extends AppCompatActivity {
+public class ListCameraActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class listCameraActivity extends AppCompatActivity {
     }
 
     public void halSewa(View view) {
-        Intent intent = new Intent(listCameraActivity.this, SewaKameraActivity.class);
+        Intent intent = new Intent(ListCameraActivity.this, SewaKameraActivity.class);
         startActivity(intent);
     }
 }

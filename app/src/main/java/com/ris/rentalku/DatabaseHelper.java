@@ -2,9 +2,13 @@ package com.ris.rentalku;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "rentalku.db";
@@ -18,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_UANG_BAYAR = "uang_bayar";
     public static final String COLUMN_STATUS = "status";
 
-    // SQL statement to create the table
+    // SQL statement untuk membuat tabel sewa
     private static final String CREATE_TABLE_SEWA =
             "CREATE TABLE " + TABLE_SEWA + " (" +
                     COLUMN_ID + " TEXT, " +
@@ -37,6 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SEWA);
     }
 
+    // mendapatkan jummlah row yang ada
     public int getRowCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_SEWA, null);
@@ -51,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    // melihat data yang tersimpan
     public void logAllData() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_SEWA, null);
@@ -80,6 +86,118 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public class SewaItem {
+        private int id;
+        private String namaPenyewa;
+        private String jenisKamera;
+        private String status;
+
+        // Constructors
+        public SewaItem() {
+        }
+
+        public SewaItem(int id, String namaPenyewa, String jenisKamera, String status) {
+            this.id = id;
+            this.namaPenyewa = namaPenyewa;
+            this.jenisKamera = jenisKamera;
+            this.status = status;
+        }
+
+        // Getters and Setters
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNamaPenyewa() {
+            return namaPenyewa;
+        }
+
+        public void setNamaPenyewa(String namaPenyewa) {
+            this.namaPenyewa = namaPenyewa;
+        }
+
+        public String getJenisKamera() {
+            return jenisKamera;
+        }
+
+        public void setJenisKamera(String jenisKamera) {
+            this.jenisKamera = jenisKamera;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+    }
+
+    // Inside DatabaseHelper class
+
+    public List<SewaItem> getAllSewaItems() {
+        List<SewaItem> sewaItemList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.query(
+                    TABLE_SEWA,
+                    new String[]{COLUMN_ID, COLUMN_NAMA_PENYEWA, COLUMN_NAMA_KAMERA, COLUMN_STATUS},
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    SewaItem sewaItem = createSewaItemFromCursor(cursor);
+                    if (sewaItem != null) {
+                        sewaItemList.add(sewaItem);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return sewaItemList;
+    }
+
+    private SewaItem createSewaItemFromCursor(Cursor cursor) {
+        SewaItem sewaItem = null;
+
+        int idIndex = cursor.getColumnIndex(COLUMN_ID);
+        int namaPenyewaIndex = cursor.getColumnIndex(COLUMN_NAMA_PENYEWA);
+        int jenisKameraIndex = cursor.getColumnIndex(COLUMN_NAMA_KAMERA);
+        int statusIndex = cursor.getColumnIndex(COLUMN_STATUS);
+
+        if (idIndex >= 0 && namaPenyewaIndex >= 0 && jenisKameraIndex >= 0 && statusIndex >= 0) {
+            sewaItem = new SewaItem();
+            sewaItem.setId(cursor.getInt(idIndex));
+            sewaItem.setNamaPenyewa(cursor.getString(namaPenyewaIndex));
+            sewaItem.setJenisKamera(cursor.getString(jenisKameraIndex));
+            sewaItem.setStatus(cursor.getString(statusIndex));
+        }
+
+        return sewaItem;
+    }
+
+
+
+
+    // menghapus dan memperbarui data tabel jika ada data baru
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SEWA);

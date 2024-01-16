@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Tombol_info(View view) {
-        Intent intent =new Intent(MainActivity.this, listCameraActivity.class);
+        Intent intent =new Intent(MainActivity.this, ListCameraActivity.class);
         startActivity(intent);
     }
 
@@ -25,8 +25,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void tombol_contact(View view) {
+    public void tombol_pengembalian(View view) {
         Intent intent =new Intent(MainActivity.this, PengembalianActivity.class);
+        startActivity(intent);
+    }
+
+    public void tombol_list(View view) {
+        Intent intent =new Intent(MainActivity.this, ListSewaActivity.class);
         startActivity(intent);
     }
 }
