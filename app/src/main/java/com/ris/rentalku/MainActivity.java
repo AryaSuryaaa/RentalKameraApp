@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tombol_contact(View view) {
-        Intent intent =new Intent(MainActivity.this, ContactActivity.class);
+        Intent intent =new Intent(MainActivity.this, PengembalianActivity.class);
         startActivity(intent);
     }
 }
