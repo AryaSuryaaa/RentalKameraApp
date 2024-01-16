@@ -6,16 +6,16 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DaftarMobilActivity extends AppCompatActivity {
+public class listCameraActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daftar_mobil);
+        setContentView(R.layout.activity_daftar_kamera); 
     }
 
-    public void hal_sewa(View view) {
-        Intent intent =new Intent(DaftarMobilActivity.this, SewaMobilActivity.class);
+    public void halSewa(View view) {
+        Intent intent = new Intent(listCameraActivity.this, SewaMobilActivity.class);
         startActivity(intent);
     }
 }

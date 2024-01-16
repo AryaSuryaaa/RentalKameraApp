@@ -22,7 +22,7 @@
             android:name=".SewaMobilActivity"
             android:exported="true" />
         <activity
-            android:name=".DaftarMobilActivity"
+            android:name=".listCameraActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

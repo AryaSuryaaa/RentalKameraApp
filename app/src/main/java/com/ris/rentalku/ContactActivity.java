@@ -52,7 +52,6 @@ public class ContactActivity extends AppCompatActivity {
             this.rTitle = title;
             this.rDescription = description;
             this.rImgs = imgs;
-
         }
 
         @NonNull

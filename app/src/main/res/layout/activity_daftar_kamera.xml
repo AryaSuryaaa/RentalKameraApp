@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DaftarMobilActivity"
+    tools:context=".listCameraActivity"
     android:orientation="vertical"
     android:background="@color/azure">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Informasi Mobil"
+        android:text="Informasi Kamera"
         android:textStyle="bold"
         android:background="@color/utama"
         android:textColor="@color/white"
@@ -41,7 +41,7 @@
                     android:cropToPadding="true"
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/avansa"/>
+                    android:src="@drawable/kamera_dslr"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -50,7 +50,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Toyota Avansa"
+                    android:text="Kamera DSLR"
                     android:textStyle="bold"
                     android:textSize="18dp"
                     android:textColor="@color/utama"
@@ -59,12 +59,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tahun 2020"
+                    android:text="1 Kamera 2 Baterai 1 Memori"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7 tempat duduk"
+                    android:text="Lensa Original"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                     android:cropToPadding="true"
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/xenia"/>
+                    android:src="@drawable/kamera_mirrorless"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dihatsu Xenia"
+                    android:text="Kamera Mirrorless"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:textStyle="bold"
@@ -111,12 +111,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tahun 2020 :"
+                    android:text="1 Kamera 2 Baterai 1 Memori"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7 tempat duduk"
+                    android:text="Lensa original"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -144,7 +144,7 @@
                     android:cropToPadding="true"
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/pajerojpg"/>
+                    android:src="@drawable/kamera_vlog"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -153,7 +153,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mitsubisi Pajero"
+                    android:text="Kamera Vlog"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:textStyle="bold"
@@ -162,12 +162,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tahun 2020"
+                    android:text="1 Kamera 3 Baterai 2 Memori"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7 tempat duduk"
+                    android:text="Kamera Original + Wide"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                     android:cropToPadding="true"
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/fortuner"/>
+                    android:src="@drawable/webcam"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -205,7 +205,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Toyota Fortuner"
+                    android:text="Webcam"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:textStyle="bold"
@@ -214,12 +214,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="tahun 2021 :"
+                    android:text="1 Kamera 1 Kabel"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7 tempat duduk"
+                    android:text="Support usb 3.0"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -236,7 +236,7 @@
             android:layout_marginTop="30dp">
 
             <Button
-                android:onClick="hal_sewa"
+                android:onClick="halSewa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sewa Sekarang"

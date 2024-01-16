@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Tombol_info(View view) {
-        Intent intent =new Intent(MainActivity.this, DaftarMobilActivity.class);
+        Intent intent =new Intent(MainActivity.this, listCameraActivity.class);
         startActivity(intent);
     }
 
