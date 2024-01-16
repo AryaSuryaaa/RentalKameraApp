@@ -283,6 +283,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void resetData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            db.delete(TABLE_SEWA, null, null);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+    }
+
     // menghapus dan memperbarui data tabel jika ada data baru
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -31,10 +31,10 @@
         app:layout_constraintTop_toBottomOf="@+id/top_list" />
 
     <Button
-        android:id="@+id/btn_reset_data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Reset Data"
+        android:onClick="tombol_reset_data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
