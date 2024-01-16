@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StrukActivity extends AppCompatActivity {
-    TextView nama_penyewa, jenis_kamera,lama_sewa,total,uang_bayar,uang_kembali;
+    TextView nama_penyewa, jenis_kamera, lama_sewa, total, uang_bayar, uang_kembali;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
