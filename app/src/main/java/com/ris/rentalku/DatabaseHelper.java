@@ -1,5 +1,6 @@
 package com.ris.rentalku;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -88,18 +89,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public class SewaItem {
         private int id;
-        private String namaPenyewa;
-        private String jenisKamera;
-        private String status;
+        private String namaPenyewa, jenisKamera, hargaSewa, uangBayar, status;
 
         // Constructors
-        public SewaItem() {
-        }
+        public SewaItem() { }
 
-        public SewaItem(int id, String namaPenyewa, String jenisKamera, String status) {
+        public SewaItem(int id, String namaPenyewa, String jenisKamera, String status, String hargaSewa, String uangBayar) {
             this.id = id;
             this.namaPenyewa = namaPenyewa;
             this.jenisKamera = jenisKamera;
+            this.hargaSewa = hargaSewa;
+            this.uangBayar = uangBayar;
             this.status = status;
         }
 
@@ -124,8 +124,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return jenisKamera;
         }
 
+        public String getHargaSewa() {
+            return hargaSewa;
+        }
+
+        public String getUangBayar() {
+            return uangBayar;
+        }
+
         public void setJenisKamera(String jenisKamera) {
             this.jenisKamera = jenisKamera;
+        }
+
+        public void setHargaSewa(String hargaSewa) {
+            this.hargaSewa = hargaSewa;
+        }
+
+        public void setUangBayar(String uangBayar) {
+            this.uangBayar = uangBayar;
         }
 
         public String getStatus() {
@@ -136,8 +152,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             this.status = status;
         }
     }
-
-    // Inside DatabaseHelper class
 
     public List<SewaItem> getAllSewaItems() {
         List<SewaItem> sewaItemList = new ArrayList<>();
@@ -194,8 +208,80 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sewaItem;
     }
 
+    public SewaItem getSewaItemById(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        SewaItem sewaItem = null;
 
+        try {
+            cursor = db.query(
+                    TABLE_SEWA,
+                    new String[]{COLUMN_ID, COLUMN_NAMA_PENYEWA, COLUMN_NAMA_KAMERA, COLUMN_HARGA, COLUMN_UANG_BAYAR, COLUMN_STATUS},
+                    COLUMN_ID + " = ?",
+                    new String[]{id},
+                    null,
+                    null,
+                    null
+            );
 
+            if (cursor != null && cursor.moveToFirst()) {
+                sewaItem = new SewaItem();
+
+                int namaPenyewaIndex = cursor.getColumnIndex(COLUMN_NAMA_PENYEWA);
+                if (namaPenyewaIndex != -1) {
+                    sewaItem.setNamaPenyewa(cursor.getString(namaPenyewaIndex));
+                }
+
+                int jenisKameraIndex = cursor.getColumnIndex(COLUMN_NAMA_KAMERA);
+                if (jenisKameraIndex != -1) {
+                    sewaItem.setJenisKamera(cursor.getString(jenisKameraIndex));
+                }
+
+                int hargaSewaIndex = cursor.getColumnIndex(COLUMN_HARGA);
+                if (hargaSewaIndex != -1) {
+                    sewaItem.setHargaSewa(cursor.getString(hargaSewaIndex));
+                }
+
+                int uangBayarIndex = cursor.getColumnIndex(COLUMN_UANG_BAYAR);
+                if (uangBayarIndex != -1) {
+                    sewaItem.setUangBayar(cursor.getString(uangBayarIndex));
+                }
+
+                int statusIndex = cursor.getColumnIndex(COLUMN_STATUS);
+                if (statusIndex != -1) {
+                    sewaItem.setStatus(cursor.getString(statusIndex));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return sewaItem;
+    }
+
+    public void updateStatus(String id, String newStatus) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        try {
+            values.put(COLUMN_STATUS, newStatus);
+
+            db.update(
+                    TABLE_SEWA,
+                    values,
+                    COLUMN_ID + " = ?",
+                    new String[]{id}
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+    }
 
     // menghapus dan memperbarui data tabel jika ada data baru
     @Override
