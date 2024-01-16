@@ -24,6 +24,8 @@ public class SewaKameraActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
 
+    int angka_id = 0;
+
 
     String list_kamera[] = {"Kamera DSLR","Kamera Mirrorless","Kamera Vlog","Webcam"};
 
@@ -42,6 +44,7 @@ public class SewaKameraActivity extends AppCompatActivity {
         db = dbHelper.getWritableDatabase();
 
         int rowCount = dbHelper.getRowCount() + 1;
+        angka_id = rowCount;
         id_sewa.setText(Integer.toString(rowCount));
 
         ArrayAdapter ad_kamera = new ArrayAdapter(SewaKameraActivity.this, androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item, list_kamera);
@@ -81,6 +84,7 @@ public class SewaKameraActivity extends AppCompatActivity {
             Toast.makeText(this, "Uang Kurang", Toast.LENGTH_SHORT).show();
         }else{
             ContentValues values = new ContentValues();
+            values.put(DatabaseHelper.COLUMN_ID, angka_id);
             values.put(DatabaseHelper.COLUMN_NAMA_PENYEWA, s_nama);
             values.put(DatabaseHelper.COLUMN_NAMA_KAMERA, ad_listkamera.getSelectedItem().toString());
             values.put(DatabaseHelper.COLUMN_HARGA, ttl_hargasewa);
