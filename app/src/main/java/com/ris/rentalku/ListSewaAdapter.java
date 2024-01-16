@@ -1,6 +1,7 @@
 package com.ris.rentalku;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ListSewaAdapter extends RecyclerView.Adapter<ListSewaAdapter.ViewHolder> {
 
@@ -35,7 +37,14 @@ public class ListSewaAdapter extends RecyclerView.Adapter<ListSewaAdapter.ViewHo
         holder.idTextView.setText(String.valueOf(sewaItem.getId()));
         holder.namaPenyewaTextView.setText(sewaItem.getNamaPenyewa());
         holder.jenisKameraTextView.setText(sewaItem.getJenisKamera());
-        holder.statusTextView.setText(sewaItem.getStatus());
+
+        if (Objects.equals(sewaItem.getStatus(), "sewa")) {
+            holder.statusTextView.setText(sewaItem.getStatus());
+            holder.statusTextView.setTextColor(Color.RED);
+        } else {
+            holder.statusTextView.setText(sewaItem.getStatus());
+            holder.statusTextView.setTextColor(Color.GREEN);
+        }
     }
 
     @Override
