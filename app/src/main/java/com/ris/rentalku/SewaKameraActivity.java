@@ -1,6 +1,8 @@
 package com.ris.rentalku;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,8 +18,11 @@ public class SewaKameraActivity extends AppCompatActivity {
     String s_nama;
 
     Spinner ad_listkamera;
-    TextView harga_kamera;
+    TextView harga_kamera, id_sewa;
     EditText lama_sewa,uangbayar,nama_penyewa;
+
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase db;
 
 
     String list_kamera[] = {"Kamera DSLR","Kamera Mirrorless","Kamera Vlog","Webcam"};
@@ -26,11 +31,18 @@ public class SewaKameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sewa_kamera);
+        id_sewa = findViewById(R.id.id_sewa);
         nama_penyewa = findViewById(R.id.nama_penyewa);
         ad_listkamera = findViewById(R.id.ad_listkamera);
         harga_kamera = findViewById(R.id.harga_kamera);
         lama_sewa = findViewById(R.id.lama_sewa);
         uangbayar = findViewById(R.id.uangbayar);
+
+        dbHelper = new DatabaseHelper(this);
+        db = dbHelper.getWritableDatabase();
+
+        int rowCount = dbHelper.getRowCount() + 1;
+        id_sewa.setText(Integer.toString(rowCount));
 
         ArrayAdapter ad_kamera = new ArrayAdapter(SewaKameraActivity.this, androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item, list_kamera);
         ad_listkamera.setAdapter(ad_kamera);
@@ -68,16 +80,33 @@ public class SewaKameraActivity extends AppCompatActivity {
         if (jml_uang < ttl_hargasewa) {
             Toast.makeText(this, "Uang Kurang", Toast.LENGTH_SHORT).show();
         }else{
-            Intent intent = new Intent(SewaKameraActivity.this,StrukActivity.class);
+            ContentValues values = new ContentValues();
+            values.put(DatabaseHelper.COLUMN_NAMA_PENYEWA, s_nama);
+            values.put(DatabaseHelper.COLUMN_NAMA_KAMERA, ad_listkamera.getSelectedItem().toString());
+            values.put(DatabaseHelper.COLUMN_HARGA, ttl_hargasewa);
+            values.put(DatabaseHelper.COLUMN_UANG_BAYAR, jml_uang);
+            values.put(DatabaseHelper.COLUMN_STATUS, "sewa");
 
-            intent.putExtra("nama",s_nama);
-            intent.putExtra("kamera", ad_listkamera.getSelectedItem().toString());
-            intent.putExtra("lama",jml_lmsw);
-            intent.putExtra("total",ttl_hargasewa);
-            intent.putExtra("uang",jml_uang);
-            intent.putExtra("kembalian",jml_uang-ttl_hargasewa);
+            long newRowId = db.insert(DatabaseHelper.TABLE_SEWA, null, values);
 
-            startActivity(intent);
+            if (newRowId != -1) {
+                dbHelper.logAllData();
+
+                Intent intent = new Intent(SewaKameraActivity.this, StrukActivity.class);
+
+                intent.putExtra("id", id_sewa.toString());
+                intent.putExtra("nama",s_nama);
+                intent.putExtra("kamera", ad_listkamera.getSelectedItem().toString());
+                intent.putExtra("lama",jml_lmsw);
+                intent.putExtra("total",ttl_hargasewa);
+                intent.putExtra("uang",jml_uang);
+                intent.putExtra("kembalian",jml_uang-ttl_hargasewa);
+
+                startActivity(intent);
+
+            } else {
+                Toast.makeText(this, "Gagal menyimpan data", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
